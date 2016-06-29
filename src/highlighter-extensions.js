@@ -12,22 +12,23 @@ highlighter.engine.registerLanguage('solidity', function(hljs) {
         'instanceof with throw case default try this switch continue typeof delete ' +
         'let yield const export super debugger as async await ' +
         'mapping address struct internal public returns private ' +
-        'string uint uint8 uint16 uint32 uint64 uint128 ' +
+        'bool string uint uint8 uint16 uint32 uint64 uint128 ' +
         'bytes4 bytes8 bytes16 bytes32 bytes64 bytes128 ' +
-        'now block timestamp coinbase difficulty gaslimit number blockhash gas msg.sender ' +
-        'gasprice origin contract this is',
+        'now block timestamp coinbase difficulty gaslimit number blockhash gas ' +
+        'gasprice origin contract library this is event',
       literal:
-        'true false null undefined NaN Infinity',
+        'true false null',
       built_in:
-        'eval isFinite isNaN parseFloat parseInt decodeURI decodeURIComponent ' +
-        'encodeURI encodeURIComponent escape unescape Object Function Boolean Error ' +
-        'EvalError InternalError RangeError ReferenceError StopIteration SyntaxError ' +
-        'TypeError URIError Number Math Date String RegExp Array Float32Array ' +
-        'Float64Array Int16Array Int32Array Int8Array Uint16Array Uint32Array ' +
-        'Uint8Array Uint8ClampedArray ArrayBuffer DataView JSON Intl arguments require ' +
-        'module console window document Symbol Set Map WeakSet WeakMap Proxy Reflect ' +
-        'Promise ' +
-        'sha3 sha256 ripemd160 ecrecover suicide call callcode '
+        'msg self sender balance ' // +
+        // 'eval isFinite isNaN parseFloat parseInt decodeURI decodeURIComponent ' +
+        // 'encodeURI encodeURIComponent escape unescape Object Function Boolean Error ' +
+        // 'EvalError InternalError RangeError ReferenceError StopIteration SyntaxError ' +
+        // 'TypeError URIError Number Math Date String RegExp Array Float32Array ' +
+        // 'Float64Array Int16Array Int32Array Int8Array Uint16Array Uint32Array ' +
+        // 'Uint8Array Uint8ClampedArray ArrayBuffer DataView JSON Intl arguments require ' +
+        // 'module console window document Symbol Set Map WeakSet WeakMap Proxy Reflect ' +
+        // 'Promise ' +
+        // 'sha3 sha256 ripemd160 ecrecover suicide call callcode '
     },
     contains: [
       {
