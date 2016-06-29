@@ -53,6 +53,16 @@ highlighter.engine.registerLanguage('solidity', function(hljs) {
         'sha3 sha256 ripemd160 erecover addmod mulmod ',
     };
 
+    var SOL_NUMBER = {
+        className: 'number',
+        variants: [
+          { begin: '\\b(0[bB][01]+)' },
+          { begin: '\\b(0[oO][0-7]+)' },
+          { begin: hljs.C_NUMBER_RE }
+        ],
+        relevance: 0
+    };
+
     var SOL_FUNC_PARAMS = {
         className: 'params',
         begin: /\(/, end: /\)/,
@@ -61,7 +71,10 @@ highlighter.engine.registerLanguage('solidity', function(hljs) {
         keywords: SOL_KEYWORDS,
         contains: [
           hljs.C_LINE_COMMENT_MODE,
-          hljs.C_BLOCK_COMMENT_MODE
+          hljs.C_BLOCK_COMMENT_MODE,
+          hljs.APOS_STRING_MODE,
+          hljs.QUOTE_STRING_MODE,
+          SOL_NUMBER
         ]
     };
 
@@ -74,15 +87,7 @@ highlighter.engine.registerLanguage('solidity', function(hljs) {
       hljs.QUOTE_STRING_MODE,
       hljs.C_LINE_COMMENT_MODE,
       hljs.C_BLOCK_COMMENT_MODE,
-      {
-        className: 'number',
-        variants: [
-          { begin: '\\b(0[bB][01]+)' },
-          { begin: '\\b(0[oO][0-7]+)' },
-          { begin: hljs.C_NUMBER_RE }
-        ],
-        relevance: 0
-      },
+      SOL_NUMBER,
       // functions
       {
         className: 'function',
