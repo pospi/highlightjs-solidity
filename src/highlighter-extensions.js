@@ -6,7 +6,6 @@ export default function extend(highlighter) {
 // :TODO:
 // - fixed point numbers
 // - match built-in members, but only as members (must have dot prefix)
-// - match built-in visibility specifiers as keywords
 // - `_` inside modifiers
 // - assembly block keywords
 
@@ -46,8 +45,8 @@ highlighter.engine.registerLanguage('solidity', function(hljs) {
     built_in:
         'now ' +
         // 'balance length push ' +
-        'this super selfdestruct ' + //'send call callcode delegatecall ' +
-        'msg ' + //'data gas sender sig value ' +
+        'this super selfdestruct ' + 'send call callcode delegatecall ' +
+        'msg ' + /*'data sender sig ' +*/ 'gas value ' +
         'block ' + //'blockhash coinbase difficulty gaslimit number timestamp ' +
         'tx ' + //'gasprice origin ' +
         'sha3 sha256 ripemd160 erecover addmod mulmod ',
