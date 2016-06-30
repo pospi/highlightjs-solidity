@@ -5,7 +5,6 @@ export default function extend(highlighter) {
 //
 // :TODO:
 // - fixed point numbers
-// - match built-in members, but only as members (must have dot prefix)
 // - `_` inside modifiers
 // - assembly block keywords
 
@@ -44,11 +43,13 @@ highlighter.engine.registerLanguage('solidity', function(hljs) {
         'second seconds minute minutes hour hours day days week weeks year years',
     built_in:
         'now ' +
-        // 'balance length push ' +
-        'this super selfdestruct ' + 'send call callcode delegatecall ' +
-        'msg ' + /*'data sender sig ' +*/ 'gas value ' +
-        'block ' + //'blockhash coinbase difficulty gaslimit number timestamp ' +
-        'tx ' + //'gasprice origin ' +
+        'this super selfdestruct ' +
+        'msg ' +
+        'block ' +
+        'tx ' +
+        // these aren't really valid toplevel, but worth highlighting as unique
+        'send call callcode delegatecall ' +
+        'balance length push ' +
         'sha3 sha256 ripemd160 erecover addmod mulmod ',
     };
 
@@ -77,6 +78,18 @@ highlighter.engine.registerLanguage('solidity', function(hljs) {
         ]
     };
 
+    function makeBuiltinProps(obj, props) {
+        return {
+            begin: obj + '\\.',
+            end: /\W/,
+            excludeBegin: true,
+            excludeEnd: true,
+            keywords: {
+                built_in: SOL_KEYWORDS.built_in
+            }
+        };
+    }
+
   return {
     aliases: ['sol'],
     keywords: SOL_KEYWORDS,
@@ -103,6 +116,10 @@ highlighter.engine.registerLanguage('solidity', function(hljs) {
       {
         begin: /\$[(.]/ // relevance booster for a pattern common to JS libs: `$(something)` and `$.something`
       },
+      makeBuiltinProps('', 'send call callcode delegatecall'),
+      makeBuiltinProps('msg', 'gas value data sender sig'),
+      makeBuiltinProps('block', 'blockhash coinbase difficulty gaslimit number timestamp '),
+      makeBuiltinProps('tx', 'gasprice origin'),
       {
         begin: '\\.' + hljs.IDENT_RE,
         relevance: 0 // hack: prevents detection of keywords after dots
