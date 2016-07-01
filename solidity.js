@@ -56,10 +56,6 @@ function hljsDefineSolidity(hljs) {
             'block ' +
             'tx ' +
             'sha3 sha256 ripemd160 erecover addmod mulmod ' +
-            // :NOTE: These aren't really valid toplevel, but are worth highlighting as unique
-            //        to avoid newcomers shadowing complex language-specific features.
-            'gas value ' +
-            'send call callcode delegatecall ' +
             'balance length push',
     };
 
@@ -127,7 +123,7 @@ function hljsDefineSolidity(hljs) {
             {
                 begin: /\$[(.]/, // relevance booster for a pattern common to JS libs: `$(something)` and `$.something`
             },
-            makeBuiltinProps('', 'send call callcode delegatecall'),
+            makeBuiltinProps('', 'gas value send call callcode delegatecall'),
             makeBuiltinProps('msg', 'data sender sig'),
             makeBuiltinProps('block', 'blockhash coinbase difficulty gaslimit number timestamp '),
             makeBuiltinProps('tx', 'gasprice origin'),
