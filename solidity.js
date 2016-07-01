@@ -49,13 +49,15 @@ function hljsDefineSolidity(hljs) {
             'wei szabo finney ether ' +
             'second seconds minute minutes hour hours day days week weeks year years',
         built_in:
+            'self ' +   // :NOTE: not a real keyword, but a convention used in storage manipulation libraries
             'this super selfdestruct ' +
             'now ' +
             'msg ' +
             'block ' +
             'tx ' +
             'sha3 sha256 ripemd160 erecover addmod mulmod ' +
-            // these aren't really valid toplevel, but worth highlighting as unique
+            // :NOTE: These aren't really valid toplevel, but are worth highlighting as unique
+            //        to avoid newcomers shadowing complex language-specific features.
             'send call callcode delegatecall ' +
             'balance length push',
     };
