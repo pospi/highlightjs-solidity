@@ -86,13 +86,12 @@ function hljsDefineSolidity(hljs) {
         ],
     };
 
-    function makeBuiltinProps(obj, props) {
-        const hasPrefix = obj !== '';
+    function makeBuiltinProps(obj, props, skipClassName) {
         return {
-            className: hasPrefix ? 'built_in' : undefined,
-            begin: obj + '\\.',
-            end: /\W/,
-            excludeBegin: !hasPrefix,
+            className: skipClassName ? undefined : 'built_in',
+            begin: obj + '\s*\\.\s*',
+            end: /[^A-Za-z0-9$_\.]/,
+            excludeBegin: false,
             excludeEnd: true,
             keywords: {
                 built_in: props,
@@ -125,7 +124,7 @@ function hljsDefineSolidity(hljs) {
             {
                 begin: /\$[(.]/, // relevance booster for a pattern common to JS libs: `$(something)` and `$.something`
             },
-            makeBuiltinProps('', 'gas value send call callcode delegatecall'),
+            makeBuiltinProps('([A-Za-z0-9$_]|\\))', 'gas value send call callcode delegatecall', true),
             makeBuiltinProps('msg', 'data sender sig'),
             makeBuiltinProps('block', 'blockhash coinbase difficulty gaslimit number timestamp '),
             makeBuiltinProps('tx', 'gasprice origin'),
