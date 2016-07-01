@@ -56,6 +56,8 @@ function hljsDefineSolidity(hljs) {
             'block ' +
             'tx ' +
             'sha3 sha256 ripemd160 erecover addmod mulmod ' +
+            // :NOTE: not really toplevel, but advantageous to have highlighted as if reserved
+            'send call callcode delegatecall ' +
             'balance length push',
     };
 
