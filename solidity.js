@@ -95,7 +95,7 @@ function hljsDefineSolidity(hljs) {
             excludeBegin: true,
             excludeEnd: true,
             keywords: {
-                built_in: SOL_KEYWORDS.built_in,
+                built_in: props,
             },
         };
     }
