@@ -89,10 +89,12 @@ function hljsDefineSolidity(hljs) {
     };
 
     function makeBuiltinProps(obj, props) {
+        const hasPrefix = obj !== '';
         return {
+            className: hasPrefix ? 'built_in' : undefined,
             begin: obj + '\\.',
             end: /\W/,
-            excludeBegin: true,
+            excludeBegin: !hasPrefix,
             excludeEnd: true,
             keywords: {
                 built_in: props,
