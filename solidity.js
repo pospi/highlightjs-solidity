@@ -33,7 +33,7 @@ function hljsDefineSolidity(hljs) {
             'bytes25 bytes26 bytes27 bytes28 bytes29 bytes30 bytes31 bytes32 ' +
             'enum struct mapping address ' +
 
-            'delete ' +
+            'new delete ' +
             'if else for while continue break return throw ' +
 
             'function modifier event ' +
