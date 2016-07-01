@@ -13,6 +13,8 @@
  * @since:   2016-07-01
  */
 
+module || (module = {});    // shim for browser use
+
 function hljsDefineSolidity(hljs) {
     var SOL_KEYWORDS = {
         keyword:
