@@ -56,7 +56,8 @@ function hljsDefineSolidity(hljs) {
             'block ' +
             'tx ' +
             'sha3 sha256 ripemd160 erecover addmod mulmod ' +
-            // :NOTE: not really toplevel, but advantageous to have highlighted as if reserved
+            // :NOTE: not really toplevel, but advantageous to have highlighted as if reserved to
+            //        avoid newcomers making mistakes due to accidental name collisions.
             'send call callcode delegatecall',
     };
 
@@ -85,16 +86,30 @@ function hljsDefineSolidity(hljs) {
         ],
     };
 
-    function makeBuiltinProps(obj, props, skipClassName) {
+    var SOL_RESERVED_MEMBERS = {
+        begin: /\.\s*/,  // match any property access up to start of prop
+        end: /[^A-Za-z0-9$_\.]/,
+        excludeBegin: true,
+        excludeEnd: true,
+        keywords: {
+            built_in: 'gas value send call callcode delegatecall balance length push',
+        },
+        relevance: 2,
+    };
+
+    function makeBuiltinProps(obj, props) {
         return {
-            className: skipClassName ? undefined : 'built_in',
-            begin: obj + '\s*\\.\s*',
+            begin: obj + '\\.\\s*',
             end: /[^A-Za-z0-9$_\.]/,
             excludeBegin: false,
             excludeEnd: true,
             keywords: {
-                built_in: props,
+                built_in: obj + ' ' + props,
             },
+            contains: [
+                SOL_RESERVED_MEMBERS,
+            ],
+            relevance: 10,
         };
     }
 
@@ -110,7 +125,7 @@ function hljsDefineSolidity(hljs) {
             SOL_NUMBER,
             { // functions
                 className: 'function',
-                beginKeywords: 'function modifier', end: /[{;=]/, excludeEnd: true,
+                beginKeywords: 'function modifier', end: /[{;]/, excludeEnd: true,
                 contains: [
                     hljs.inherit(hljs.TITLE_MODE, {
                         begin: /[A-Za-z$_][0-9A-Za-z$_]*/,
@@ -120,17 +135,11 @@ function hljsDefineSolidity(hljs) {
                 ],
                 illegal: /\[|%/,
             },
-            {
-                begin: /\$[(.]/, // relevance booster for a pattern common to JS libs: `$(something)` and `$.something`
-            },
-            makeBuiltinProps('([A-Za-z0-9$_]|\\))', 'gas value send call callcode delegatecall balance length push', true),
+            // built-in members
             makeBuiltinProps('msg', 'data sender sig'),
             makeBuiltinProps('block', 'blockhash coinbase difficulty gaslimit number timestamp '),
             makeBuiltinProps('tx', 'gasprice origin'),
-            {
-                begin: '\\.' + hljs.IDENT_RE,
-                relevance: 0, // hack: prevents detection of other keywords after dots
-            },
+            SOL_RESERVED_MEMBERS,
             { // contracts & libraries
                 className: 'class',
                 beginKeywords: 'contract library', end: /[{]/, excludeEnd: true,
