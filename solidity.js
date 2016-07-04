@@ -27,7 +27,7 @@ function hljsDefineSolidity(hljs) {
             'int168 uint168 int176 uint176 int184 uint184 int192 uint192 ' +
             'int200 uint200 int208 uint208 int216 uint216 int224 uint224 ' +
             'int232 uint232 int240 uint240 int248 uint248 int256 uint256 ' +
-            'byte bytes1 bytes2 bytes3 bytes4 bytes5 bytes6 bytes7 bytes8 ' +
+            'byte bytes bytes1 bytes2 bytes3 bytes4 bytes5 bytes6 bytes7 bytes8 ' +
             'bytes9 bytes10 bytes11 bytes12 bytes13 bytes14 bytes15 bytes16 ' +
             'bytes17 bytes18 bytes19 bytes20 bytes21 bytes22 bytes23 bytes24 ' +
             'bytes25 bytes26 bytes27 bytes28 bytes29 bytes30 bytes31 bytes32 ' +
