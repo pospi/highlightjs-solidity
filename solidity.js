@@ -125,7 +125,7 @@ function hljsDefineSolidity(hljs) {
             SOL_NUMBER,
             { // functions
                 className: 'function',
-                beginKeywords: 'function modifier', end: /[{;]/, excludeEnd: true,
+                beginKeywords: 'function modifier event', end: /[{;]/, excludeEnd: true,
                 contains: [
                     hljs.inherit(hljs.TITLE_MODE, {
                         begin: /[A-Za-z$_][0-9A-Za-z$_]*/,
