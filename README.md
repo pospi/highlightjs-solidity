@@ -37,4 +37,4 @@ This is a pretty simple package, the only thing you might want to do differently
 
 Find me at http://pospi.spadgos.com
 
-Tip me some ether? (; `0x235485011fCd14d3F1e77ef738d496c7B6e6A4C0`
+Tip me some ether? (; `0x52c04Bf91ebB58221A4ac65967e4CDa15a871eba`
