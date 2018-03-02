@@ -34,15 +34,15 @@ function hljsDefineSolidity(hljs) {
             'enum struct mapping address ' +
 
             'new delete ' +
-            'if else for while continue break return throw ' +
+            'if else for while continue break return throw assert require revert ' +
 
             'function modifier event ' +
             'constant anonymous indexed ' +
             'storage memory ' +
-            'external public internal private returns ' +
+            'external public internal pure view private returns ' +
 
             'import using ' +
-            'contract library ' +
+            'contract interface library ' +
             'assembly',
         literal:
             'true false ' +
@@ -140,9 +140,9 @@ function hljsDefineSolidity(hljs) {
             makeBuiltinProps('block', 'blockhash coinbase difficulty gaslimit number timestamp '),
             makeBuiltinProps('tx', 'gasprice origin'),
             SOL_RESERVED_MEMBERS,
-            { // contracts & libraries
+            { // contracts & libraries & interfaces
                 className: 'class',
-                beginKeywords: 'contract library', end: /[{]/, excludeEnd: true,
+                beginKeywords: 'contract interface library', end: /[{]/, excludeEnd: true,
                 illegal: /[:"\[\]]/,
                 contains: [
                     { beginKeywords: 'is' },
